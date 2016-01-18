@@ -12,8 +12,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active" ><a href="/admin/student">学生検索</a></li>
-                <li class="active" ><a href="/admin/company">会社検索</a></li>
+                <li class="active" ><a href="/umj/search">検索</a></li>
+                <li><a href="#">新規登録</a></li>
+                <li><a href="#">応募承認</a></li>
+                <li><a href="#">メッセージ</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

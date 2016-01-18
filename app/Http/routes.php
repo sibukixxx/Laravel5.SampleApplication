@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -46,7 +47,7 @@ $router->get('/home', function(){
 
 
  /**
-  * ユナイテッドマインドジャパン ユーザー管理システム
+  * ユナイテッドマインドジャパン 管理システム
   * ・応募者情報新規入力
   * ・登録済み情報の編集
   * ・登録済み情報の削除
@@ -61,11 +62,79 @@ $router->get('/home', function(){
   */
 
 Route::group(['prefix' => 'umj'], function() {
-    Route::get('/', 'ElasticsearchController@index');
-    Route::post('/', 'ElasticsearchController@create');
-    // 追加
-    Route::get('search', 'ElasticsearchController@searchOnES');
+    // ログイン画面
+    Route::get('/login', 'Umj\LoginController@getIndex');
+//    Route::get('/login2', 'Umj\LoginController@getIndex2');
+
+    // 検索画面TOP
+    Route::get('/search', 'Umj\SearchController@getIndex');
+
+    // 新規会員登録
+    // 新規企業登録
+//    Route::resource('register', 'Umj\RegisterController');
+
+    // ユーザー新規登録・一覧・編集・削除
+//    Route::resource('user', 'Umj\UserController');
+// [GET]->index, [GET]->show($id)
+// [GET]->create, [POST]->store
+// [GET]->edit($id), [PUT/PATCH]->update($id)
+// [DELETE]->destroy($id)
+
+    // 企業新規登録・一覧・編集・削除
+//    Route::resource('company', 'Umj\CompanyController');
+// [GET]->index, [GET]->show($id)
+// [GET]->create, [POST]->store
+// [GET]->edit($id), [PUT/PATCH]->update($id)
+// [DELETE]->destroy($id)
+
+    // 求人広告一覧
+//    Route::get('/job',    'Umj\JobController@index');
+    // 応募承認
+//    Route::post('/approve', ['uses' => 'Umj\JobController@approve', 'as' => 'approve']);
+
+    // メッセージ(仕様待ち)
+//    Route::resource('messages.comments', 'MessageCommentController');
+    // URLはこんな感じになる( photos/{photoId}/comments/{commentId} )
+
+
+
+
+
+
+
 });
+
+
+/**
+ * 企業広告出稿サイド
+ *
+ */
+//Route::group(['prefix' => 'company'], function () {
+//    // ログイン画面
+//    Route::controller('login', 'Admin\LoginController');
+//    Route::get('/login2', 'Admin\LoginController@getIndex2');
+//
+//    //会社登録画面
+//    Route::resource('company', 'Admin\CompanyController');
+//
+//});
+
+
+/**
+ * 留学生求人検索サイド
+ *
+ */
+
+// ログイン画面
+// アカウント作成画面
+//Route::controller('signup', 'Company\SignupController');
+// ダッシュボード画面
+//Route::controller('dashboard', 'Company\DashboardController');
+
+
+
+
+
 
 
 ###########################################################################
@@ -97,16 +166,6 @@ Route::group(['prefix' => 'contact'], function() {
 
 });
 
-// ----- 管理画面 ----- //
-Route::group(['prefix' => 'admin'], function () {
-    // ログイン画面
-    Route::controller('login', 'Admin\LoginController');
-    Route::get('/login2', 'Admin\LoginController@getIndex2');
-
-    //会社登録画面
-    Route::resource('company', 'Admin\CompanyController');
-
-});
 
 // 遊びとか機能を試してみたい場合の色々
 // Vue.jsのサンプルページ
@@ -123,6 +182,6 @@ Route::get('/top', function () {
 // カスタムライブラリの使用例
 Route::get('/hoge',function(){
 
-    $hello = new App\Library\MasterData;
+    $hello = new App\Libraries\MasterData;
     return $hello->sayHello();
 });
