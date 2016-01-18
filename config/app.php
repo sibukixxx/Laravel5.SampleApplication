@@ -147,13 +147,15 @@ return [
          App\Providers\LocalServiceProvider::class,
         'App\Providers\RepositoryProvider',
 //        App\Providers\RepositoryProvider::class,
+        'App\Providers\HelperServiceProvider',
 
         /*
         * Composerで追加したパッケージのサービスプロバイダー
         */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Bestmomo\Scafold\ScafoldServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -202,7 +204,10 @@ return [
         'URL'       => 'Illuminate\Support\Facades\URL',
         'Validator' => 'Illuminate\Support\Facades\Validator',
         'View'      => 'Illuminate\Support\Facades\View',
-        'MasterData'      => 'App\Library\MasterData',
+        'MasterData'      => 'App\Libraries\MasterData',
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Text' => 'App\Libraries\SampleTextHelper',
 
     ],
 
