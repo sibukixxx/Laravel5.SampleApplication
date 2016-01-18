@@ -1,0 +1,117 @@
+var Elixir = require('laravel-elixir'),
+    gulp = require('gulp'),
+    bower = require('bower'),
+    notify = require('gulp-notify'),
+    react = require('gulp-react'),
+    uglify = require('gulp-uglify'),
+    minifyCSS = require('gulp-minify-css'),
+    gulpFilter = require('gulp-filter'),
+    urlAdjuster = require('gulp-css-url-adjuster'),
+    mainBowerFiles = require('main-bower-files');
+
+var browserSync = require("browser-sync");
+
+var assetsDir = Elixir.config.assetsDir;
+var Task = Elixir.Task;
+
+Elixir.extend('bowerInstall', function () {
+    new Task('bower', function () {
+        return bower.commands.install([], {save: true}, {})
+            .on('end', function (data) {
+                console.log(data);
+            });
+    });
+});
+
+/**
+ * bower install後に各assetsファイルを指定のディレクトリへ設置します
+ * $ gulp publish
+ * bowerタスクは自動で実行されます
+ */
+Elixir.extend('assetsPublish', function () {
+    new Task('publish', function () {
+        var jsFilter = gulpFilter('**/*.js', {restore: true});
+        var cssFilter = gulpFilter('**/*.css', {restore: true});
+        var fontFilter = gulpFilter([
+            "**/glyphicons-*",
+            "**/Material-*"
+        ], {restore: true});
+        var imageFilter = gulpFilter(['**/*.png', "**/*.gif"]);
+        return gulp.src(
+            mainBowerFiles({
+                paths: {
+                    bowerDirectory: 'vendor/bower_components',
+                    bowerrc: '.bowerrc',
+                    bowerJson: 'bower.json'
+                }
+            })
+        )
+            .pipe(jsFilter)
+            .pipe(gulp.dest('public/assets/js'))
+            //.pipe(jsFilter.restore())
+            .pipe(cssFilter)
+            .pipe(urlAdjuster({
+                replace: ['../fonts/', ''],
+                prepend: '/assets/fonts/'
+            }))
+            .pipe(minifyCSS())
+            .pipe(gulp.dest('public/assets/css'))
+            //.pipe(cssFilter.restore())
+            .pipe(fontFilter)
+            .pipe(gulp.dest('public/assets/fonts'))
+            //.pipe(fontFilter.restore())
+            .pipe(imageFilter)
+            .pipe(gulp.dest('public/images'));
+    });
+});
+
+/**
+ * React.js コンパイル
+ * $ gulp react
+ */
+Elixir.extend('reactPreCompile', function () {
+    new Task('react', function () {
+        return gulp.src('resources/js/react/**/*.jsx')
+            .pipe(react())
+            .pipe(uglify())
+            .pipe(gulp.dest('public/js'));
+    })
+    .watch('react', 'resources/js/react/**/*.jsx');
+});
+
+/**
+ * browser reload
+ * $ gulp browserSync
+ */
+gulp.task('browserSync', function () {
+    browserSync({
+        open: true,
+        port: 3001,
+        proxy: "192.168.99.100",
+        notify: false
+    });
+});
+
+/**
+ * browser reload
+ * $ gulp browserReload
+ */
+gulp.task('browserReload', function (){
+    browserSync.reload();
+});
+
+
+Elixir(function (mix) {
+    mix.bowerInstall()
+        .assetsPublish()
+        .reactPreCompile()
+        .sass("*.scss");
+});
+
+//
+//監視ファイル
+//
+gulp.task('relaod', ['browserSync'], function () {
+    gulp.watch("./resources/views/*", ['browserReload']);
+    gulp.watch("./resources/views/*", ['browserReload']);
+});

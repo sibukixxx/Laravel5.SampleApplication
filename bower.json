@@ -1,0 +1,57 @@
+{
+  "name": "tutorial-laravel5",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "*",
+    "bootstrap-material-design": "*",
+    "react": "0.*",
+    "highlightjs" : "*",
+    "d3": "~3.4",
+    "jquery": "~2",
+    "showdown": "*"
+  },
+  "exportsOverride": {
+  },
+  "overrides": {
+    "showdown": {
+      "main": [
+        "**/*.min.js"
+      ]
+    },
+    "bootstrap": {
+      "main": [
+        "**/*.min.css",
+        "**/*.min.js",
+        "**/glyphicons-*"
+      ]
+    },
+    "jquery": {
+      "main": "**/*.min.js"
+    },
+    "bootstrap-material-design": {
+      "main": [
+        "**/*.min.js",
+        "**/*.min.css",
+        "**/Material-*"
+      ]
+    },
+    "react": {
+      "main": [
+        "**/*.min.js"
+      ]
+    },
+    "highlightjs": {
+      "main": [
+        "**/*.pack.js",
+        "**/github.css"
+      ]
+    }
+  }
+}

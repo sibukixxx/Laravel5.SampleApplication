@@ -1,0 +1,13 @@
+/*@media (min-width: 768px){*/
+  /*.navbar-nav{*/
+    /*margin: 0 auto;*/
+    /*display: table;*/
+    /*table-layout: fixed;*/
+    /*float:none;*/
+  /*}*/
+/*}*/
+
+.profile_img {
+  height:15px;
+  width: 15px;
+}

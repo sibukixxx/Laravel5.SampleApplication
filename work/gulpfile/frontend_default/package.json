@@ -1,0 +1,49 @@
+{
+  "name": "front-end-starter",
+  "version": "1.0.5",
+  "description": "This is a starter kit of the Web front-end development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:espower-babel/guess test/**/*.test.js",
+    "start": "npm run watch",
+    "esdoc": "esdoc -c esdoc.json",
+    "build:css": "stylus -c ./src/stylus/App.styl -o ./src/bundle.css -m --sourcemap-root ./stylus",
+    "build:js": "browserify -t babelify ./src/js/App.js -d | exorcist ./src/bundle.js.map > ./src/bundle.js",
+    "watch:css": "stylus -c -w ./src/stylus/App.styl -o ./src/bundle.css -m --sourcemap-root ./stylus",
+    "watch:js": "watchify -v -t babelify ./src/js/App.js -o \"exorcist ./src/bundle.js.map > ./src/bundle.js\" -d",
+    "watch:server": "browser-sync start --server src",
+    "watch": "npm-run-all -p watch:css watch:js watch:server",
+    "release:css": "stylus -c ./src/stylus/App.styl -o ./dist/bundle.css",
+    "release:js": "browserify -t babelify ./src/js/App.js | uglifyjs > ./dist/bundle.js",
+    "release:clean": "rimraf ./dist",
+    "release:copy": "cpx \"./src/**/{*.html,*.eot,*.svg,*.ttf,*.woff,package.json}\" ./dist",
+    "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app"
+  },
+  "keywords": [
+    "web",
+    "frontend",
+    "starter"
+  ],
+  "author": "sibukixxx",
+  "license": "MIT",
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browser-sync": "^2.9.6",
+    "browserify": "^11.1.0",
+    "cpx": "^1.2.1",
+    "esdoc": "^0.3.0",
+    "espower-babel": "^3.3.0",
+    "exorcist": "^0.4.0",
+    "mocha": "^2.3.3",
+    "npm-run-all": "^1.2.11",
+    "power-assert": "^1.0.1",
+    "rimraf": "^2.4.3",
+    "stylus": "^0.52.4",
+    "uglify-js": "^2.4.24",
+    "watchify": "^3.4.0"
+  }
+}
