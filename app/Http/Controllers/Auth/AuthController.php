@@ -64,10 +64,6 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        Log::info('ああああ '.$data['password_confirmation']);
-        Log::debug('いいいいい '.$data['password_confirmation']);
-        Log::warning('ううう '.$data['password_confirmation']);
-        Log::error('えええ '.$data['password_confirmation']);
         return User::create([
             'name' => $data['name'],
             'uid' => rand(),

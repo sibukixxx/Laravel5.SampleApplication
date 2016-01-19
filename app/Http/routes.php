@@ -18,24 +18,24 @@ Route::get('/welcome', function () {
 
 
 ##### 認証機能の追加 #####################################################
-$router->get('/', function(){
+$router->get('/', function () {
     $currentUser = Auth::user();
-    if(empty($currentUser)){
+    if (empty($currentUser)) {
         $name = 'ゲスト';
-    }else{
+    } else {
         $name = $currentUser->name;
     }
-    return view('top.index')->with('name',$name);;
+    return view('top.index')->with('name', $name);;
 });
 
-Route::get('auth/logout', function(){
+Route::get('auth/logout', function () {
     Auth::logout();
     return redirect(property_exists($this, 'redirectAfterLogout')
-        ? $this->redirectAfterLogout : '/admin/login');
+        ? $this->redirectAfterLogout : '/');
 });
 
 
-$router->get('/home', function(){
+$router->get('/home', function () {
     $currentUser = Auth::user();
 });
 
@@ -46,22 +46,22 @@ $router->get('/home', function(){
  */
 
 
- /**
-  * ユナイテッドマインドジャパン 管理システム
-  * ・応募者情報新規入力
-  * ・登録済み情報の編集
-  * ・登録済み情報の削除
-  * ・登録済み情報の一括出力
-  * ・登録済み情報の絞り込み
-  * ・求人応募履歴統計算出と出力
-  * ・メッセージ機能
-  * ・メッセージの履歴
-  * ・応募承認
-  *
-  *
-  */
+/**
+ * ユナイテッドマインドジャパン 管理システム
+ * ・応募者情報新規入力
+ * ・登録済み情報の編集
+ * ・登録済み情報の削除
+ * ・登録済み情報の一括出力
+ * ・登録済み情報の絞り込み
+ * ・求人応募履歴統計算出と出力
+ * ・メッセージ機能
+ * ・メッセージの履歴
+ * ・応募承認
+ *
+ *
+ */
+Route::group(['prefix' => 'umj'], function () {
 
-Route::group(['prefix' => 'umj'], function() {
     // ログイン画面
     Route::get('/login', 'Umj\LoginController@getIndex');
 //    Route::get('/login2', 'Umj\LoginController@getIndex2');
@@ -97,13 +97,7 @@ Route::group(['prefix' => 'umj'], function() {
     // URLはこんな感じになる( photos/{photoId}/comments/{commentId} )
 
 
-
-
-
-
-
 });
-
 
 /**
  * 企業広告出稿サイド
@@ -124,23 +118,24 @@ Route::group(['prefix' => 'umj'], function() {
  * 留学生求人検索サイド
  *
  */
-
 // ログイン画面
-// アカウント作成画面
-//Route::controller('signup', 'Company\SignupController');
+Route::get('/login', 'Iris\LoginController@getIndex');
+
+// 新規アカウント作成画面
+Route::get('/signup', 'Iris\SignupController@getIndex');
+
+
+// 以下、マイページ内機能
+Route::group(['prefix' => 'mypage'], function () {
 // ダッシュボード画面
 //Route::controller('dashboard', 'Company\DashboardController');
-
-
-
-
-
+});
 
 
 ###########################################################################
 
 // Elasticsearch追加
-Route::group(['prefix' => 'elasticsearch'], function() {
+Route::group(['prefix' => 'elasticsearch'], function () {
     Route::get('/', 'ElasticsearchController@index');
     Route::post('/', 'ElasticsearchController@create');
     // 追加
@@ -148,7 +143,7 @@ Route::group(['prefix' => 'elasticsearch'], function() {
 });
 
 // ファイルアップロード機能の実装
-Route::group(['prefix' => 'feature_sample'], function() {
+Route::group(['prefix' => 'feature_sample'], function () {
     Route::get('/fileuploder/', 'FileuploderController@index');
     Route::post('/fileuploder/', 'FileuploderController@create');
 
@@ -158,7 +153,7 @@ Route::group(['prefix' => 'feature_sample'], function() {
 });
 
 // ----- お問い合わせ ----- //
-Route::group(['prefix' => 'contact'], function() {
+Route::group(['prefix' => 'contact'], function () {
     Route::get('/', 'ContactController@getIndex');
     Route::post('/confirm', 'ContactController@getForm');
     Route::post('/send', 'ContactController@postConfirm');
@@ -180,7 +175,7 @@ Route::get('/top', function () {
 
 
 // カスタムライブラリの使用例
-Route::get('/hoge',function(){
+Route::get('/hoge', function () {
 
     $hello = new App\Libraries\MasterData;
     return $hello->sayHello();

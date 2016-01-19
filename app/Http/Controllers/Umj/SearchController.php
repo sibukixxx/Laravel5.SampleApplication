@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Input;
 class SearchController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('umj', ['except' => ['index', 'show']]);
+    }
+
     // getで/searchにアクセスされた場合
     public function getIndex()
     {

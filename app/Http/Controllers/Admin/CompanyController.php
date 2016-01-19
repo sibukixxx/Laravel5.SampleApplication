@@ -1,9 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\CompanyServiceInterface;
+use App\Libraries\GeoHelper;
+
+
 /**
  * Class CompanyController
  * @package App\Http\Controllers
@@ -14,9 +19,12 @@ class CompanyController extends Controller
      * @var CompanyServiceInterface
      */
     private $companyService;
-    public function __construct(CompanyServiceInterface $companyServiceInterface)
+    public function __construct(CompanyServiceInterface $companyServiceInterface, GeoHelper $prefectures)
     {
         $this->companyService = $companyServiceInterface;
+        $this->prefecturesHelper = $prefectures;
+
+
     }
     /**
      * 一覧
@@ -25,7 +33,7 @@ class CompanyController extends Controller
     public function index()
     {
         $list = $this->companyService->getList();
-        return view('admin.company.list', compact('list'));
+        return view('admin.company.list', compact('list','prefectures'));
     }
     /**
      * 新規入力画面
@@ -34,7 +42,8 @@ class CompanyController extends Controller
     public function create()
     {
         $company = $this->companyService->createEntity();
-        return view('admin.company.edit', compact('company'));
+        $prefectures2 = $this->prefecturesHelper->get_prefectures();
+        return view('admin.company.edit', compact('company', 'prefectures2'));
     }
     /**
      * 新規登録処理

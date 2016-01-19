@@ -29,6 +29,6 @@ class Kernel extends HttpKernel
         'auth' => 'App\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
-//  	'auth2' => 'App\Http\Middleware\GreetingMiddleware'
+        'umj' => 'App\Http\Middleware\UmjAuthenticateMiddleware' // UMJ管理のログイン機構
     ];
 }

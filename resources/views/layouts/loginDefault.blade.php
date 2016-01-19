@@ -14,27 +14,26 @@
     <link rel="shortcut icon" href="/icon/favicon.png" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" href="/icon/favicon.png">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    {{--<link href="/assets/css/material-fullpalette.min.css" rel="stylesheet">--}}
-    {{--<link href="/assets/css/ripples.min.css" rel="stylesheet">--}}
-    {{--<link href="/assets/css/material.min.css" rel="stylesheet">--}}
-    {{--<link href="/assets/css/roboto.min.css" rel="stylesheet">--}}
+    <link href="/assets/css/material-fullpalette.min.css" rel="stylesheet">
+    <link href="/assets/css/ripples.min.css" rel="stylesheet">
+    <link href="/assets/css/material.min.css" rel="stylesheet">
+    <link href="/assets/css/roboto.min.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
     <link href="/stylus/app.css" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
-@include('elements.header')
 <div class="container" id="sub">
     @yield('content')
 </div>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
-{{--<script src="/assets/js/highlight.pack.js"></script>--}}
-{{--<script src="/assets/js/material.min.js"></script>--}}
-{{--<script src="/assets/js/ripples.min.js"></script>--}}
+<script src="/assets/js/highlight.pack.js"></script>
+<script src="/assets/js/material.min.js"></script>
+<script src="/assets/js/ripples.min.js"></script>
 <script src="/assets/js/d3.js"></script>
 <script src="/assets/js/jquery.min.js"></script>
-{{--<script>$.material.init();</script>--}}
+<script>$.material.init();</script>
 <script src="/assets/js/react.min.js"></script>
 <script src="/assets/js/react-with-addons.min.js"></script>
 @yield('scripts')

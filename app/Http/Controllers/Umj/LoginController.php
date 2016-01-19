@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Input;
 class LoginController extends Controller
 {
 
+    public function __construct()
+    {
+    }
+
     // getでlogin/にアクセスされた場合
     public function getIndex()
     {

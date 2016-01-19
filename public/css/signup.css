@@ -1,0 +1,25 @@
+.signup {
+    border: 3px ridge #ddd;
+    padding: 10px;
+}
+
+.signup__title {
+    border: 1px solid #ddd;
+    width: 20%;
+    box-sizing: content-box;
+    padding: 10px;
+
+}
+
+.signup__label {
+    font-weight:bold;
+}
+
+.signup__field {
+    width:30%;
+    margin-right: 10px;
+}
+
+.signup__action {
+    width: 10%;
+}
