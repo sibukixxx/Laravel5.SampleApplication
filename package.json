@@ -6,8 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
-    "name" : "Yuichi Takada",
-    "email" : "sibukixxx@gmail.com"
+    "name": "Yuichi Takada",
+    "email": "sibukixxx@gmail.com"
   },
   "license": "MIT",
   "bugs": {
@@ -15,21 +15,14 @@
   },
   "homepage": "https://github.com/sibukixxx/laravel5-template.git",
   "devDependencies": {
-    "gulp": "^3.8.8",
-    "bower": "*",
-    "gulp-bower": "*",
-    "gulp-react": "*",
-    "gulp-filter": "*",
-    "gulp-shell": "0.*",
-    "gulp-notify": "*",
-    "laravel-elixir": "*",
-    "main-bower-files": "*",
-    "underscore": "1.*",
-    "gulp-plumber": "*",
-    "gulp-minify-css": "*",
-    "gulp-css-url-adjuster": "*",
-    "browser-sync": "*",
-    "gulp-uglify": "*",
-    "gulp-stylus": "~2.1.0"
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.5.1",
+    "laravel-elixir": "^3.4.3",
+    "laravel-elixir-browser-sync": "^1.0.0"
+  },
+  "dependencies": {
+    "laravel-elixir": "^3.0.0",
+    "bootstrap-sass": "^3.0.0"
   }
 }
